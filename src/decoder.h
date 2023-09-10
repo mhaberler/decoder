@@ -134,6 +134,7 @@ public:
     SBBT_002C_ENCR,
     SBDW_002C,
     SBDW_002C_ENCR,
+    MOPEKA_UNIVERSAL_PRO,
     BLE_ID_MAX
   };
 
