@@ -21,6 +21,7 @@ if(SKBUILD)
     install(TARGETS _decoder LIBRARY DESTINATION TheengsDecoder)
 
 else()
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
     add_library(decoder
                 src/decoder.cpp
