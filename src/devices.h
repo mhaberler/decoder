@@ -85,6 +85,7 @@
 #include "devices/OralB_json.h"
 #include "devices/Oras_json.h"
 #include "devices/OTOD_json.h"
+#include "devices/MYSTERY_json.h"
 #include "devices/PH10_json.h"
 #include "devices/XOSSX2_json.h"
 #include "devices/TPTH_json.h"
@@ -253,4 +254,5 @@ const char* _devices[][2] = {
     {_SBMO_003Z_ENCR_json, _SBMO_003Z_ENCR_json_props},
     {_SBHT_003C_json, _SBHT_003C_json_props},
     {_SBHT_003C_ENCR_json, _SBHT_003C_ENCR_json_props},
+    {_MYSTERY_json, _MYSTERY_json_props},
 };
