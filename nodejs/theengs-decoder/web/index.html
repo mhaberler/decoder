@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Theengs sensorlog decoder</title>
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.4rem; }
+  fieldset { border: 1px solid #ccc; border-radius: 6px; margin: 1rem 0; padding: 1rem; }
+  legend { padding: 0 .5rem; color: #555; }
+  #status { margin-top: .5rem; color: #444; min-height: 1.2em; }
+  #download { display: none; margin-top: 1rem; }
+  #download a { display: inline-block; padding: .5rem 1rem; background: #2e7d32; color: #fff; border-radius: 4px; text-decoration: none; }
+  #summary { font-family: ui-monospace, monospace; white-space: pre-wrap; background: #f6f6f6; padding: .75rem; border-radius: 4px; }
+  button { padding: .5rem 1rem; }
+  .row { display: flex; gap: 1rem; align-items: center; }
+</style>
+</head>
+<body>
+<h1>Theengs sensorlog decoder</h1>
+<p>Upload a sensorlogs-style JSON array. Each entry is decoded via TheengsDecoder (in your browser) and a <code>decoded</code> field is added. Download the result when finished.</p>
+
+<fieldset>
+  <legend>Input</legend>
+  <div class="row">
+    <input type="file" id="file" accept=".json,application/json">
+    <button id="run" disabled>Decode</button>
+  </div>
+  <div id="status">Loading decoder&hellip;</div>
+</fieldset>
+
+<fieldset>
+  <legend>Summary</legend>
+  <div id="summary">(no file processed yet)</div>
+  <div id="download"><a id="dl" href="#">Download decoded JSON</a></div>
+</fieldset>
+
+<script src="../dist/theengs_decoder_wasm.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
