@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "build": "node scripts/build.js",
+    "decode-log": "node scripts/decode-log.js",
     "test": "node --test test/*.test.js"
   },
   "engines": {
