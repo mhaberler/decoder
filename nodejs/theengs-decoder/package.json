@@ -29,6 +29,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "decode-log": "node scripts/decode-log.js",
+    "decode-sensorlogs": "node scripts/decode-log.js sensorlogs/*.json",
     "test": "node --test test/*.test.js"
   },
   "engines": {

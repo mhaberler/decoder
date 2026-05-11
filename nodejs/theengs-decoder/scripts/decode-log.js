@@ -73,9 +73,10 @@ function formatJson({ entry, decoded }) {
 async function runCli(argv) {
   const args = argv.slice(2);
   const jsonOut = args.includes('--json');
-  const files = args.filter((a) => a !== '--json');
+  const showAll = args.includes('--all');
+  const files = args.filter((a) => a !== '--json' && a !== '--all');
   if (files.length === 0) {
-    process.stderr.write('Usage: decode-log [--json] <log.json> [<log.json>...]\n');
+    process.stderr.write('Usage: decode-log [--json] [--all] <log.json> [<log.json>...]\n');
     process.exit(1);
   }
 
@@ -109,6 +110,7 @@ async function runCli(argv) {
         const key = decoded.model_id || decoded.model || '?';
         byModel[key] = (byModel[key] || 0) + 1;
       }
+      if (!decoded && !showAll) continue;
       const line = jsonOut ? formatJson({ entry, decoded }) : formatPretty({ entry, decoded });
       process.stdout.write(line + '\n');
     }
