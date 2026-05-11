@@ -23,8 +23,19 @@ function resolveFile(urlPath) {
   if (!rel.startsWith('/web/') && !rel.startsWith('/dist/')) {
     rel = '/web' + rel;
   }
-  const abs = path.normalize(path.join(pkgDir, rel));
+  let abs = path.normalize(path.join(pkgDir, rel));
   if (!abs.startsWith(pkgDir)) return null;
+  if (!fs.existsSync(abs) && rel.startsWith('/web/')) {
+    const tail = rel.slice('/web/'.length);
+    // Vite public/ convention: files under web/public/ are served at root.
+    const pub = path.join(pkgDir, 'web', 'public', tail);
+    if (fs.existsSync(pub)) return pub;
+    // Last resort for the wasm bundle: serve the sibling node-build artifact
+    // so serve.js works without a Vite build step.
+    if (tail === 'theengs_decoder_wasm.js') {
+      return path.join(pkgDir, 'dist', 'theengs_decoder_wasm.js');
+    }
+  }
   return abs;
 }
 
