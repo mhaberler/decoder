@@ -2,10 +2,10 @@
 # Build the web app for production and rsync it to a static host.
 #
 # Configuration via .env (gitignored) at the package root:
-#   DEPLOY_HOST   user@host for rsync (e.g. mah@mah.priv.at)
+#   DEPLOY_HOST   user@host for rsync (e.g. user@example.com)
 #   DEPLOY_PATH   absolute remote path (e.g. /var/www/.../apps/theengs-decoder/)
 #   DEPLOY_BASE   URL base path Vite bakes into the build (e.g. /apps/theengs-decoder/)
-#   DEPLOY_URL    optional; derived when host is mah.priv.at, else required
+#   DEPLOY_URL    public URL echoed after a successful deploy
 #   DEPLOY_PORT   optional SSH port; defaults to 22 when unset
 #
 # Process-env values override .env values, so CI / one-off overrides still work:
@@ -42,6 +42,7 @@ missing=()
 [[ -z "${DEPLOY_HOST:-}" ]] && missing+=(DEPLOY_HOST)
 [[ -z "${DEPLOY_PATH:-}" ]] && missing+=(DEPLOY_PATH)
 [[ -z "${DEPLOY_BASE:-}" ]] && missing+=(DEPLOY_BASE)
+[[ -z "${DEPLOY_URL:-}" ]] && missing+=(DEPLOY_URL)
 if (( ${#missing[@]} > 0 )); then
   echo "Missing required deploy settings: ${missing[*]}" >&2
   echo "Copy .env.example to .env and fill in the values." >&2
@@ -55,17 +56,6 @@ if [[ -n "${DEPLOY_PORT:-}" ]]; then
     exit 1
   fi
   rsync_ssh=(-e "ssh -p $DEPLOY_PORT")
-fi
-
-# Derive DEPLOY_URL only when we can guess the public hostname reliably.
-if [[ -z "${DEPLOY_URL:-}" ]]; then
-  if [[ "$DEPLOY_HOST" == *mah.priv.at* ]]; then
-    DEPLOY_URL="https://static.mah.priv.at${DEPLOY_BASE}"
-  else
-    echo "DEPLOY_URL is not set and cannot be derived for host '$DEPLOY_HOST'." >&2
-    echo "Set DEPLOY_URL in .env." >&2
-    exit 1
-  fi
 fi
 
 out_dir="web/dist"

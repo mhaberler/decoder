@@ -41,7 +41,7 @@ runtime dependencies needed.
 
 ```sh
 cd nodejs/theengs-decoder
-cp .env.example .env       # then edit DEPLOY_HOST, DEPLOY_PATH, DEPLOY_BASE
+cp .env.example .env       # then edit DEPLOY_HOST, DEPLOY_PATH, DEPLOY_BASE, DEPLOY_URL
 npm run deploy-web
 ```
 
