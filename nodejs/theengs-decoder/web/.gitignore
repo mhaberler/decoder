@@ -1,3 +1,4 @@
 dist/
+dist/
 node_modules/
 public/theengs_decoder_wasm.js

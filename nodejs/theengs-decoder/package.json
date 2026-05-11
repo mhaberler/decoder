@@ -35,6 +35,7 @@
     "web:dev": "vite web",
     "web:build": "vite build web",
     "web:preview": "vite preview --outDir web/dist",
+    "deploy-web": "bash scripts/deploy-web.sh",
     "test": "node --test test/*.test.js"
   },
   "engines": {
