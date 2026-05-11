@@ -1,0 +1,165 @@
+2026-05-11T07:02:22.739Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-78 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=58 accy=13
+2026-05-11T07:02:22.926Z 5b178f0c-f323-a116-de3e-ad31daea7246 rssi=-91 [Otodata/RC1010] level=39.2 status=0
+2026-05-11T07:02:24.311Z 0d5448ee-49e4-4a55-cbb5-b84a9c9bc172 rssi=-97 [Mopeka/Lippert/M1017] cidc=false tempc=16 tempf=60.8 lvl_cm=85.34184622 lvl_in=33.59915206 sync=false volt=1.90625 batt=0 quality=0 accx=1 accy=45
+2026-05-11T07:02:24.865Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-98 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:25.379Z 43ba075b-b678-39cc-5b38-d26982745151 rssi=-96 [Ruuvi/RuuviTag_RAWv2] mac=EA:29:C4:AC:F9:E5 track=true tempc=16.47 tempf=61.646 hum=88.24 pres=913.34 accx=-0.60016698 accy=0.73746008 accz=-0.04314926 volt=2.802 tx=4 mov=91 seq=22379
+2026-05-11T07:02:25.708Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-60 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-110 accy=-83
+2026-05-11T07:02:25.725Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-66 [MikroTik/TG-BT5] track=true tempc=23.87890625 tempf=74.98203125 accx=0 accy=0.0078125 accz=-0.015625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907522 batt=100
+2026-05-11T07:02:25.825Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-65 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-19
+2026-05-11T07:02:26.024Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-61 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=0.0078125 accy=0 accz=-0.015625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907210 batt=77
+2026-05-11T07:02:26.254Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-53 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=61 accy=13
+2026-05-11T07:02:27.065Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-90 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:28.218Z 0d5448ee-49e4-4a55-cbb5-b84a9c9bc172 rssi=-92 [Mopeka/Lippert/M1017] cidc=false tempc=16 tempf=60.8 lvl_cm=85.34184622 lvl_in=33.59915206 sync=false volt=1.90625 batt=0 quality=0 accx=1 accy=45
+2026-05-11T07:02:29.219Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-58 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-110 accy=-80
+2026-05-11T07:02:29.270Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-86 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:29.336Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-64 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-12
+2026-05-11T07:02:29.538Z 5b178f0c-f323-a116-de3e-ad31daea7246 rssi=-95 [Otodata/RC1010] level=39.2 status=0
+2026-05-11T07:02:29.582Z 6ec7c2f2-bd98-5e88-19ed-776a439185ea rssi=-44 [Ruuvi/RuuviTag_RAWv2] mac=DD:79:C6:8F:BD:A2 track=true tempc=23.92 tempf=75.056 hum=74.29 accx=-0.03138128 accy=-0.12160246 accz=0.99243298 volt=3.154 tx=4 mov=140 seq=18222
+2026-05-11T07:02:29.763Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-51 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=61 accy=8
+2026-05-11T07:02:31.024Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-60 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=-0.01171875 accy=0.01171875 accz=-0.01171875 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907215 batt=77
+2026-05-11T07:02:32.729Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-56 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-110 accy=-78
+2026-05-11T07:02:33.521Z 5b178f0c-f323-a116-de3e-ad31daea7246 rssi=-93 [Otodata/RC1010] serial=56001608 modeltype=67367466
+2026-05-11T07:02:34.319Z e24a9d95-2a4e-0817-d446-d07a56bcb9b9 rssi=-59 [Ruuvi/RuuviTag_RAWv2] mac=E4:32:87:19:B4:C9 track=true tempc=23.975 tempf=75.155 hum=35.1475 pres=913.09 accx=0.00784532 accy=0 accz=1.04342756 volt=3.041 tx=4 mov=250 seq=18171
+2026-05-11T07:02:35.729Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-65 [MikroTik/TG-BT5] track=true tempc=23.87890625 tempf=74.98203125 accx=0.01171875 accy=-0.00390625 accz=-0.00390625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907532 batt=100
+2026-05-11T07:02:36.024Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-60 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=0 accy=-0.0234375 accz=0.01171875 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907220 batt=77
+2026-05-11T07:02:36.357Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-66 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-12 accy=-14
+2026-05-11T07:02:36.788Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-46 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=64 accy=16
+2026-05-11T07:02:38.085Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-96 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:38.550Z 6ec7c2f2-bd98-5e88-19ed-776a439185ea rssi=-46 [Ruuvi/RuuviTag_RAWv2] mac=DD:79:C6:8F:BD:A2 track=true tempc=23.905 tempf=75.029 hum=74.3075 accx=-0.03530394 accy=-0.12160246 accz=0.99243298 volt=3.15 tx=4 mov=140 seq=18223
+2026-05-11T07:02:39.750Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-56 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-110 accy=-80
+2026-05-11T07:02:39.868Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-62 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-12 accy=-16
+2026-05-11T07:02:40.305Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-50 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=72 accy=13
+2026-05-11T07:02:41.026Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-61 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=0.015625 accy=0 accz=0.01171875 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907225 batt=77
+2026-05-11T07:02:43.368Z 43ba075b-b678-39cc-5b38-d26982745151 rssi=-90 [Ruuvi/RuuviTag_RAWv2] mac=EA:29:C4:AC:F9:E5 track=true tempc=16.47 tempf=61.646 hum=88.26 pres=913.4 accx=-0.60016698 accy=0.73746008 accz=-0.04314926 volt=2.802 tx=4 mov=91 seq=22386
+2026-05-11T07:02:43.382Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-62 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-12 accy=-21
+2026-05-11T07:02:43.817Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-50 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=66 accy=16
+2026-05-11T07:02:45.077Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-90 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:47.545Z 6ec7c2f2-bd98-5e88-19ed-776a439185ea rssi=-44 [Ruuvi/RuuviTag_RAWv2] mac=DD:79:C6:8F:BD:A2 track=true tempc=23.905 tempf=75.029 hum=74.3075 accx=-0.03530394 accy=-0.12160246 accz=0.99243298 volt=3.15 tx=4 mov=140 seq=18223
+2026-05-11T07:02:50.276Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-58 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-107 accy=-88
+2026-05-11T07:02:50.411Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-63 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-7 accy=-19
+2026-05-11T07:02:50.839Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-50 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=64 accy=18
+2026-05-11T07:02:51.025Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-60 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=0 accy=0 accz=-0.00390625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907235 batt=77
+2026-05-11T07:02:53.898Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-90 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:02:57.434Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-65 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-19
+2026-05-11T07:02:57.855Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-53 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=61 accy=21
+2026-05-11T07:02:58.049Z 77d0b863-bdb9-e712-bb3b-c5b15959be20 rssi=-77 [Ruuvi/RuuviTag_RAWv2] mac=C2:6E:D1:70:2B:44 track=true tempc=23.795 tempf=74.831 hum=39.0475 accx=0.16082906 accy=0.07453054 accz=0.94928372 volt=2.489 tx=4 mov=96 seq=5380
+2026-05-11T07:03:00.081Z 43ba075b-b678-39cc-5b38-d26982745151 rssi=-91 [Ruuvi/RuuviTag_RAWv2] mac=EA:29:C4:AC:F9:E5 track=true tempc=16.47 tempf=61.646 hum=88.255 pres=913.34 accx=-0.60016698 accy=0.73746008 accz=-0.04707192 volt=2.813 tx=4 mov=91 seq=22392
+2026-05-11T07:03:01.024Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-66 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=0 accy=0.00390625 accz=-0.015625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907245 batt=77
+2026-05-11T07:03:03.068Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-94 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:03:04.326Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-55 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-107 accy=-80
+2026-05-11T07:03:04.459Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-66 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-12 accy=-12
+2026-05-11T07:03:04.878Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-48 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=58 accy=13
+2026-05-11T07:03:05.551Z 6ec7c2f2-bd98-5e88-19ed-776a439185ea rssi=-46 [Ruuvi/RuuviTag_RAWv2] mac=DD:79:C6:8F:BD:A2 track=true tempc=23.905 tempf=75.029 hum=74.3075 accx=-0.03530394 accy=-0.12160246 accz=0.99243298 volt=3.15 tx=4 mov=140 seq=18223
+2026-05-11T07:03:06.028Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-61 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=-0.0234375 accy=0.015625 accz=0.0625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907250 batt=77
+2026-05-11T07:03:07.834Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-64 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-107 accy=-80
+2026-05-11T07:03:10.756Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-64 [MikroTik/TG-BT5] track=true tempc=23.9375 tempf=75.0875 accx=-2.17578125 accy=0.05859375 accz=-0.1015625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907567 batt=100
+2026-05-11T07:03:11.477Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-65 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-5 accy=-19
+2026-05-11T07:03:11.893Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-87 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:03:15.729Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-70 [MikroTik/TG-BT5] track=true tempc=23.9375 tempf=75.0875 accx=-0.015625 accy=-0.0234375 accz=-0.01953125 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907572 batt=100
+2026-05-11T07:03:16.091Z 43ba075b-b678-39cc-5b38-d26982745151 rssi=-94 [Ruuvi/RuuviTag_RAWv2] mac=EA:29:C4:AC:F9:E5 track=true tempc=16.47 tempf=61.646 hum=88.265 pres=913.38 accx=-0.60016698 accy=0.7453054 accz=-0.04314926 volt=2.813 tx=4 mov=91 seq=22398
+2026-05-11T07:03:18.505Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-76 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-14 accy=-16
+2026-05-11T07:03:18.921Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-52 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=64 accy=16
+2026-05-11T07:03:21.027Z d7a1c0db-d451-d6a0-3cb7-bd340ebd26e0 rssi=-72 [MikroTik/TG-BT5] track=true tempc=-128 tempf=-198.4 accx=-0.00390625 accy=0 accz=0.0234375 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907265 batt=77
+2026-05-11T07:03:21.882Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-56 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.78125 batt=89.42307692 quality=0 accx=-104 accy=-80
+2026-05-11T07:03:22.019Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-64 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-10
+2026-05-11T07:03:22.434Z aa06218b-d30a-9150-b69e-866cec951617 rssi=-64 [Mopeka/Lippert/M1017] cidc=false tempc=27 tempf=80.6 lvl_cm=0 lvl_in=0 sync=false volt=2.8125 batt=94.23076923 quality=0 accx=66 accy=13
+2026-05-11T07:03:25.486Z 2e75c8fe-77fe-4ac8-9ed7-1bec3f1987ca rssi=-94 [Otodata/RC1010] level=37 status=0
+2026-05-11T07:03:25.728Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-66 [MikroTik/TG-BT5] track=true tempc=23.9375 tempf=75.0875 accx=0.00390625 accy=-0.01171875 accz=0.015625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907582 batt=100
+2026-05-11T07:03:27.657Z 9179c4ff-47ad-53ee-f6b1-e8a09e8a70b0 rssi=-73 [Mopeka/Lippert/M1017] cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-19
+2026-05-11T07:03:28.900Z 8c8c59dd-63c8-b9cc-6a6d-a4aae4161cd1 rssi=-55 [Mopeka/Lippert/M1017] cidc=false tempc=24 tempf=75.2 lvl_cm=0 lvl_in=0 sync=false volt=2.75 batt=84.61538462 quality=0 accx=-104 accy=-78
+2026-05-11T07:03:30.756Z fabfdb62-a618-a0ea-7b1d-2b3b5f9114e9 rssi=-68 [MikroTik/TG-BT5] track=true tempc=23.9375 tempf=75.0875 accx=0 accy=-0.0234375 accz=0.0234375 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907587 batt=100
+2026-05-11T07:03:31.793Z 5b178f0c-f323-a116-de3e-ad31daea7246 rssi=-94 [Otodata/RC1010] level=39.2 status=0
+2026-05-11T07:08:47.947Z 55:7C:09:C1:F4:E9 rssi=-82 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:48.060Z 6D:2F:E3:43:43:E9 rssi=-43 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:48.078Z 7A:4A:EA:CF:73:E6 rssi=-58 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:48.088Z C8:8C:D5:0C:67:FB rssi=-82 [Apple/APPLE_CONT] id=C8:8C:D5:0C:67:FB device=Apple device
+2026-05-11T07:08:48.093Z 40:C8:27:BF:73:1E rssi=-82 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:48.865Z C2:6E:D1:70:2B:44 rssi=-88 [Ruuvi/RuuviTag_RAWv2] mac=C2:6E:D1:70:2B:44 id=C2:6E:D1:70:2B:44 track=true tempc=23.74 tempf=74.732 hum=39.07 accx=0.16082906 accy=0.07453054 accz=0.94928372 volt=2.503 tx=4 mov=96 seq=5386
+2026-05-11T07:08:48.881Z 55:7C:09:C1:F4:E9 rssi=-86 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:48.887Z 6D:2F:E3:43:43:E9 rssi=-46 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:48.905Z 7A:4A:EA:CF:73:E6 rssi=-62 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:48.917Z 40:C8:27:BF:73:1E rssi=-87 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:49.989Z 6D:2F:E3:43:43:E9 rssi=-46 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:50.013Z 40:C8:27:BF:73:1E rssi=-69 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:50.040Z D8:2C:C3:C6:5D:32 rssi=-96 [Otodata/RC1010] id=D8:2C:C3:C6:5D:32 level=37.1 status=0
+2026-05-11T07:08:50.736Z C3:03:89:6E:8D:17 rssi=-66 [Mopeka/Lippert/M1017] id=C3:03:89:6E:8D:17 cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-12 accy=-16
+2026-05-11T07:08:50.752Z 55:7C:09:C1:F4:E9 rssi=-66 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:50.806Z 7A:4A:EA:CF:73:E6 rssi=-59 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:50.811Z 6D:2F:E3:43:43:E9 rssi=-45 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:50.851Z 40:C8:27:BF:73:1E rssi=-66 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:50.864Z 38:3B:26:BE:20:F9 rssi=-64 [GENERIC/BM6] id=38:3B:26:BE:20:F9 track=true batt=100 device=BM6 Tracker
+2026-05-11T07:08:51.704Z 40:C8:27:BF:73:1E rssi=-66 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:51.706Z CF:03:17:50:20:71 rssi=-55 [Apple/APPLE_CONT] id=CF:03:17:50:20:71 device=Apple device
+2026-05-11T07:08:51.753Z 5F:ED:11:D2:2A:43 rssi=-68 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:52.640Z 55:7C:09:C1:F4:E9 rssi=-66 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:52.711Z 7A:4A:EA:CF:73:E6 rssi=-54 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:52.801Z 40:C8:27:BF:73:1E rssi=-66 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:53.582Z 6D:2F:E3:43:43:E9 rssi=-12 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:53.621Z 40:C8:27:BF:73:1E rssi=-66 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:53.649Z C1:3B:98:DD:B9:21 rssi=-14 [Apple/APPLE_CONT] id=C1:3B:98:DD:B9:21 device=Apple device
+2026-05-11T07:08:53.684Z 5F:ED:11:D2:2A:43 rssi=-66 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:53.702Z CF:03:17:50:20:71 rssi=-61 [Apple/APPLE_CONT] id=CF:03:17:50:20:71 device=Apple device
+2026-05-11T07:08:53.747Z 55:7C:09:C1:F4:E9 rssi=-68 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:54.642Z 7A:4A:EA:CF:73:E6 rssi=-60 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:54.684Z 55:7C:09:C1:F4:E9 rssi=-72 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:55.609Z 80:EA:CA:11:79:6F rssi=-90 [GENERIC/TPMS] mac=80:EA:CA:11:79:6F id=80:EA:CA:11:79:6F cidc=false count=1 pres=7.47282 tempc=16.63 tempf=61.934 batt=19 alarm=false
+2026-05-11T07:08:55.611Z 5F:ED:11:D2:2A:43 rssi=-75 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:55.632Z 40:C8:27:BF:73:1E rssi=-76 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:55.653Z C1:3B:98:DD:B9:21 rssi=-17 [Apple/APPLE_CONT] id=C1:3B:98:DD:B9:21 device=Apple device
+2026-05-11T07:08:55.693Z 55:7C:09:C1:F4:E9 rssi=-76 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:55.698Z 7A:4A:EA:CF:73:E6 rssi=-58 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:55.771Z D4:01:C3:E0:BD:1F rssi=-71 [MikroTik/TG-BT5] id=D4:01:C3:E0:BD:1F track=true tempc=23.9375 tempf=75.0875 accx=0.015625 accy=0.01171875 accz=-0.09765625 flag_reed=false flag_tilt=false flag_fall=false flag_impact_x=false flag_impact_y=false flag_impact_z=false uptime=7907912 batt=100
+2026-05-11T07:08:56.519Z 7A:4A:EA:CF:73:E6 rssi=-61 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:56.583Z 6D:2F:E3:43:43:E9 rssi=-12 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:56.626Z 55:7C:09:C1:F4:E9 rssi=-66 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:57.553Z 5F:ED:11:D2:2A:43 rssi=-66 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:57.560Z 40:C8:27:BF:73:1E rssi=-68 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:57.562Z 55:7C:09:C1:F4:E9 rssi=-65 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:57.605Z 7A:4A:EA:CF:73:E6 rssi=-57 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:57.656Z C1:3B:98:DD:B9:21 rssi=-13 [Apple/APPLE_CONT] id=C1:3B:98:DD:B9:21 device=Apple device
+2026-05-11T07:08:58.443Z 7A:4A:EA:CF:73:E6 rssi=-56 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:58.495Z 6D:2F:E3:43:43:E9 rssi=-16 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:59.370Z C8:8C:D5:0C:67:FB rssi=-64 [Apple/APPLE_CONT] id=C8:8C:D5:0C:67:FB device=Apple device
+2026-05-11T07:08:59.374Z 38:3B:26:BE:20:F9 rssi=-76 [GENERIC/BM6] id=38:3B:26:BE:20:F9 track=true batt=100 device=BM6 Tracker
+2026-05-11T07:08:59.439Z D1:72:01:F1:02:6B rssi=-83 [Apple/APPLE_CONT] id=D1:72:01:F1:02:6B device=Apple device
+2026-05-11T07:08:59.476Z 55:7C:09:C1:F4:E9 rssi=-63 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:08:59.480Z 5F:ED:11:D2:2A:43 rssi=-63 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:59.508Z 7A:4A:EA:CF:73:E6 rssi=-61 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:08:59.512Z 40:C8:27:BF:73:1E rssi=-63 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:00.411Z 55:7C:09:C1:F4:E9 rssi=-64 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:00.415Z 6D:2F:E3:43:43:E9 rssi=-35 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:01.245Z 6D:2F:E3:43:43:E9 rssi=-49 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:01.263Z 5F:ED:11:D2:2A:43 rssi=-80 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:01.271Z C3:03:89:6E:8D:17 rssi=-67 [Mopeka/Lippert/M1017] id=C3:03:89:6E:8D:17 cidc=false tempc=26 tempf=78.8 lvl_cm=0 lvl_in=0 sync=false volt=2.71875 batt=79.80769231 quality=0 accx=-10 accy=-16
+2026-05-11T07:09:01.296Z 55:7C:09:C1:F4:E9 rssi=-83 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:01.367Z 38:3B:26:BE:20:F9 rssi=-66 [GENERIC/BM6] id=38:3B:26:BE:20:F9 track=true batt=100 device=BM6 Tracker
+2026-05-11T07:09:01.409Z 7A:4A:EA:CF:73:E6 rssi=-63 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:02.265Z 55:7C:09:C1:F4:E9 rssi=-64 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:02.344Z 6D:2F:E3:43:43:E9 rssi=-48 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:02.429Z 55:7C:09:C1:F4:E9 rssi=-66 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:02.442Z 40:C8:27:BF:73:1E rssi=-65 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:03.269Z 40:C8:27:BF:73:1E rssi=-66 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:03.272Z D8:2C:C3:C6:5D:32 rssi=-96 [Otodata/RC1010] id=D8:2C:C3:C6:5D:32 level=37.1 status=0
+2026-05-11T07:09:03.305Z 7A:4A:EA:CF:73:E6 rssi=-58 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:04.245Z C1:B9:1A:6B:5A:C9 rssi=-83 [Apple/APPLE_CONT] id=C1:B9:1A:6B:5A:C9 device=Apple device
+2026-05-11T07:09:04.249Z 6D:2F:E3:43:43:E9 rssi=-48 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:04.296Z 5F:ED:11:D2:2A:43 rssi=-76 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:04.300Z 55:7C:09:C1:F4:E9 rssi=-81 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:04.369Z 40:C8:27:BF:73:1E rssi=-77 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:05.073Z 55:7C:09:C1:F4:E9 rssi=-65 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:05.077Z 6D:2F:E3:43:43:E9 rssi=-40 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:05.184Z E7:38:29:A0:A1:D7 rssi=-95 [Mopeka/Lippert/M1017] id=E7:38:29:A0:A1:D7 cidc=false tempc=19 tempf=66.2 lvl_cm=91.97669742 lvl_in=36.21129819 sync=false volt=2.21875 batt=2.884615385 quality=1 accx=-17 accy=12
+2026-05-11T07:09:05.206Z 7A:4A:EA:CF:73:E6 rssi=-66 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:05.240Z 55:7C:09:C1:F4:E9 rssi=-65 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:06.165Z 6D:2F:E3:43:43:E9 rssi=-44 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:06.176Z 55:7C:09:C1:F4:E9 rssi=-62 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:06.295Z 40:C8:27:BF:73:1E rssi=-62 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:06.299Z 7A:4A:EA:CF:73:E6 rssi=-57 [Apple/APPLEDEVICE] id=7A:4A:EA:CF:73:E6 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:07.064Z 5F:ED:11:D2:2A:43 rssi=-77 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:07.105Z 55:7C:09:C1:F4:E9 rssi=-82 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:07.111Z 40:C8:27:BF:73:1E rssi=-77 [Apple/APPLEDEVICE] id=40:C8:27:BF:73:1E track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:08.037Z 55:7C:09:C1:F4:E9 rssi=-66 [Apple/APPLE_CONT] id=55:7C:09:C1:F4:E9 device=Apple device
+2026-05-11T07:09:08.045Z D8:2C:C3:C6:5D:32 rssi=-91 [Otodata/RC1010] id=D8:2C:C3:C6:5D:32 level=37.1 status=0
+2026-05-11T07:09:08.120Z 6D:2F:E3:43:43:E9 rssi=-43 [Apple/APPLEDEVICE] id=6D:2F:E3:43:43:E9 track=true prmac=true device=iPhone/iPad
+2026-05-11T07:09:08.138Z C1:3B:98:DD:B9:21 rssi=-44 [Apple/APPLE_CONT] id=C1:3B:98:DD:B9:21 device=Apple device
+2026-05-11T07:09:08.160Z 5F:ED:11:D2:2A:43 rssi=-65 [Apple/APPLEDEVICE] id=5F:ED:11:D2:2A:43 track=true prmac=true device=iPhone/iPad
