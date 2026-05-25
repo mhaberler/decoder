@@ -17,11 +17,22 @@ export function buildDecoderInput(entry) {
 
 let decoderPromise = null;
 
+function loadWasmScript() {
+  if (window.createTheengsDecoderModule) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = './theengs_decoder_wasm.js';
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('Failed to load theengs_decoder_wasm.js'));
+    document.head.appendChild(s);
+  });
+}
+
 export function loadDecoder() {
   if (decoderPromise) return decoderPromise;
-  decoderPromise = window.createTheengsDecoderModule().then((Module) => {
-    return new Module.TheengsDecoder();
-  });
+  decoderPromise = loadWasmScript()
+    .then(() => window.createTheengsDecoderModule())
+    .then((Module) => new Module.TheengsDecoder());
   return decoderPromise;
 }
 

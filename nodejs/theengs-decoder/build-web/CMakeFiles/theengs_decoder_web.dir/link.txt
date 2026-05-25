@@ -1,0 +1,1 @@
+/opt/homebrew/Cellar/emscripten/5.0.7/libexec/em++ -lembind -sMODULARIZE=1 -sEXPORT_ES6=1 -sEXPORT_NAME=createTheengsDecoderModule -sENVIRONMENT=web,worker -sALLOW_MEMORY_GROWTH=1 -sSINGLE_FILE=1 @CMakeFiles/theengs_decoder_web.dir/objects1.rsp -o theengs_decoder_web.js

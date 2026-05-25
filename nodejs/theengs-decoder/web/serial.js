@@ -152,7 +152,7 @@ export function initSerial(root) {
     if (m) {
       let json = null;
       try { json = JSON.parse(m[1]); } catch {}
-      if (json && json.origin === '/BTtoMQTT') {
+      if (json && typeof json.origin === 'string' && json.origin.startsWith('/BTtoMQTT')) {
         seen++;
         const dec = decoder ? decodeEntry(decoder, json) : null;
         if (dec) decoded++;

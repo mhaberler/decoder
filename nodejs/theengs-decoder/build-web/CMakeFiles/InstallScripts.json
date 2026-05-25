@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/mah/Ballon/src/BalloonWare/decoder/nodejs/theengs-decoder/build-web/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
