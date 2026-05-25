@@ -1,19 +1,20 @@
 'use strict';
 
-const MAC_RE = /^([0-9a-f]{2}:){5}[0-9a-f]{2}$/i;
+import { loadDecoder, decodeEntry } from './decoder.js';
+import { initSerial } from './serial.js';
 
-function buildDecoderInput(entry) {
-  const input = {};
-  let sd = entry.serviceData || '';
-  const colon = sd.indexOf(':');
-  if (colon >= 0) sd = sd.slice(colon + 1);
-  if (sd) input.servicedata = sd;
-  const md = entry.manufacturerData || '';
-  if (md) input.manufacturerdata = md;
-  if (entry.id && MAC_RE.test(entry.id)) input.id = entry.id;
-  return input;
-}
+// --- Tabs ---
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+tabBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const name = btn.dataset.tab;
+    tabBtns.forEach((b) => b.classList.toggle('active', b === btn));
+    panels.forEach((p) => p.classList.toggle('active', p.dataset.panel === name));
+  });
+});
 
+// --- File tab ---
 const fileEl = document.getElementById('file');
 const runEl = document.getElementById('run');
 const statusEl = document.getElementById('status');
@@ -24,21 +25,13 @@ const dlEl = document.getElementById('dl');
 let decoder = null;
 let lastBlobUrl = null;
 
-window.createTheengsDecoderModule().then((Module) => {
-  decoder = new Module.TheengsDecoder();
+loadDecoder().then((d) => {
+  decoder = d;
   statusEl.textContent = 'Decoder ready. Select a file.';
   runEl.disabled = false;
 }).catch((err) => {
   statusEl.textContent = 'Failed to load decoder: ' + err.message;
 });
-
-function decodeEntry(entry) {
-  const input = buildDecoderInput(entry);
-  if (!input.servicedata && !input.manufacturerdata) return null;
-  const out = decoder.decodeBLE(JSON.stringify(input));
-  if (!out) return null;
-  try { return JSON.parse(out); } catch { return null; }
-}
 
 function nextTick() {
   return new Promise((r) => setTimeout(r, 0));
@@ -51,7 +44,7 @@ async function processEntries(entries) {
   const CHUNK = 500;
   for (let i = 0; i < entries.length; i++) {
     const e = entries[i];
-    const d = decodeEntry(e);
+    const d = decodeEntry(decoder, e);
     out[i] = { ...e, decoded: d };
     if (d) {
       decoded++;
@@ -118,3 +111,6 @@ runEl.addEventListener('click', async () => {
     runEl.disabled = false;
   }
 });
+
+// --- Serial tab ---
+initSerial(document.querySelector('[data-panel="serial"]'));
