@@ -5,6 +5,12 @@ import { driverFactories, detectDongle } from './drivers/index.js';
 
 const MAX_ROWS = 2000;
 
+const ADV_ABBR = {
+  ADV_IND: 'IND', ADV_NONCONN_IND: 'NCONN', SCAN_RSP: 'SCAN_RSP',
+  ADV_SCAN_IND: 'SCAN_IND', ADV_DIRECT_IND: 'DIRECT', ADV_EXT_IND: 'EXT',
+};
+const LAST_SEEN_TTL_MS = 60_000;
+
 const PROFILES = [
   { id: 'auto', label: 'Auto-detect', baud: null, flow: null },
   { id: 'nrf', label: 'nRF Sniffer (1 Mbaud)', baud: 1000000, flow: 'hardware', driverName: 'nRF Sniffer' },
@@ -40,6 +46,7 @@ export function initSerial(root) {
   let seen = 0;
   let decoded = 0;
   let autoScroll = true;
+  const lastSeen = new Map();
 
   if (els.profile && !els.profile.dataset.populated) {
     for (const p of PROFILES) {
@@ -79,7 +86,7 @@ export function initSerial(root) {
   els.scan.addEventListener('click', onToggleScan);
   els.clear.addEventListener('click', () => {
     els.log.replaceChildren();
-    seen = 0; decoded = 0; updateCounters();
+    seen = 0; decoded = 0; lastSeen.clear(); updateCounters();
   });
 
   async function safeWrite(bytes) {
@@ -270,14 +277,27 @@ export function initSerial(root) {
   function appendBtRow(raw, dec) {
     const row = document.createElement('div');
     row.className = 'log-row ' + (dec ? 'log-decoded' : 'log-undecoded');
-    const t = new Date().toISOString().slice(11, 23);
+    const nowMs = Date.now();
+    const t = new Date(nowMs).toISOString().slice(11, 23);
     const id = raw.id || '?';
     const rssi = raw.rssi !== undefined ? `${raw.rssi}dBm` : '';
     const ch = raw.channel !== undefined ? ` ch${raw.channel}` : '';
+    const advAbbr = ADV_ABBR[raw.advType] ? ` ${ADV_ABBR[raw.advType]}` : '';
+    const randomMark = raw.addrType === 'random' ? '(R)' : '';
+    let dt = '';
+    if (raw.mac) {
+      const prev = lastSeen.get(raw.mac);
+      if (prev !== undefined) dt = ` Δ${nowMs - prev}ms`;
+      lastSeen.set(raw.mac, nowMs);
+      if (lastSeen.size > 1024) {
+        const cutoff = nowMs - LAST_SEEN_TTL_MS;
+        for (const [k, v] of lastSeen) if (v < cutoff) lastSeen.delete(k);
+      }
+    }
     const model = dec?.model_id || dec?.model || '';
     const header = document.createElement('div');
     header.className = 'log-head';
-    header.textContent = `[${t}] ${id} ${rssi}${ch} ${model ? '→ ' + model : '(undecoded)'}`;
+    header.textContent = `[${t}] ${id}${randomMark} ${rssi}${ch}${advAbbr}${dt} ${model ? '→ ' + model : '(undecoded)'}`;
     row.appendChild(header);
 
     if (dec) {

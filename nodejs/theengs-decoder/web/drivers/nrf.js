@@ -27,7 +27,14 @@ const SCAN_RSP = 0x4;
 const ADV_SCAN_IND = 0x6;
 const ADV_EXT_IND = 0x7;
 
+const ADV_TYPE_NAMES = {
+  0x0: 'ADV_IND', 0x1: 'ADV_DIRECT_IND', 0x2: 'ADV_NONCONN_IND',
+  0x3: 'SCAN_REQ', 0x4: 'SCAN_RSP', 0x5: 'CONNECT_REQ',
+  0x6: 'ADV_SCAN_IND', 0x7: 'ADV_EXT_IND',
+};
+
 const PHY_CODED = 2;
+const PHY_NAMES = { 0: '1M', 1: '2M', 2: 'Coded' };
 const HEADER_LENGTH = 6;
 const BLE_HEADER_LEN_POS = HEADER_LENGTH;
 const FLAGS_POS = BLE_HEADER_LEN_POS + 1;
@@ -104,10 +111,10 @@ function parseAdStructures(payload) {
     switch (type) {
       case 0x08:
       case 0x09:
-        out.name = String.fromCharCode(...data);
+        if (out.name === undefined) out.name = String.fromCharCode(...data);
         break;
       case 0x16: {
-        if (data.length >= 2) {
+        if (out.servicedata === undefined && data.length >= 2) {
           const uuid = (data[1] << 8) | data[0];
           out.servicedatauuid = '0x' + uuid.toString(16).padStart(4, '0');
           out.servicedata = bytesToHex(data);
@@ -115,7 +122,7 @@ function parseAdStructures(payload) {
         break;
       }
       case 0x20: {
-        if (data.length >= 4) {
+        if (out.servicedata === undefined && data.length >= 4) {
           const uuid = ((data[3] << 24) | (data[2] << 16) | (data[1] << 8) | data[0]) >>> 0;
           out.servicedatauuid = '0x' + uuid.toString(16).padStart(8, '0');
           out.servicedata = bytesToHex(data);
@@ -123,7 +130,7 @@ function parseAdStructures(payload) {
         break;
       }
       case 0x21: {
-        if (data.length >= 16) {
+        if (out.servicedata === undefined && data.length >= 16) {
           const u = Array.from(data.slice(0, 16)).reverse();
           out.servicedatauuid = bytesToHex(u).replace(
             /^(.{8})(.{4})(.{4})(.{4})(.{12})$/,
@@ -134,11 +141,55 @@ function parseAdStructures(payload) {
         break;
       }
       case 0xFF:
-        out.manufacturerdata = bytesToHex(data);
+        if (out.manufacturerdata === undefined) out.manufacturerdata = bytesToHex(data);
         break;
     }
     i = dataEnd;
   }
+  return out;
+}
+
+function parseExtendedHeader(pdu) {
+  // Common Extended Advertising Payload (Core Spec Vol 6 Part B §2.3.4)
+  // pdu[0]: extHdrLen[5:0] + advMode[7:6]
+  // pdu[1]: extended header flags (bit gates the optional fields below)
+  if (pdu.length < 2) return null;
+  const extHdrLen = pdu[0] & 0x3f;
+  if (extHdrLen === 0 || pdu.length < 1 + extHdrLen) return null;
+  const flags = pdu[1];
+  let off = 2;
+  const out = {};
+  if (flags & 0x01) {
+    if (pdu.length < off + 6) return null;
+    out.addr = pdu.slice(off, off + 6).reverse();
+    off += 6;
+  }
+  if (flags & 0x02) { off += 6; } // TargetA — skip
+  if (flags & 0x04) { off += 1; } // CTEInfo — skip
+  if (flags & 0x08) { off += 2; } // AdvDataInfo — skip
+  if (flags & 0x10) {
+    if (pdu.length < off + 3) return null;
+    const a = pdu[off], b = pdu[off + 1], c = pdu[off + 2];
+    const chIndex = a & 0x3f;
+    const offsetUnits = (a >> 7) & 1;          // 0 = 30µs, 1 = 300µs
+    const auxOffset = b | ((c & 0x1f) << 8);   // 13 bits
+    const secondaryPhyCode = (c >> 5) & 0x07;  // 1=1M, 2=2M, 3=Coded (BLE spec)
+    const phyMap = { 1: '1M', 2: '2M', 3: 'Coded' };
+    out.auxPtr = {
+      channel: chIndex,
+      offsetMs: auxOffset * (offsetUnits ? 0.3 : 0.03),
+      phy: phyMap[secondaryPhyCode] || `phy${secondaryPhyCode}`,
+    };
+    off += 3;
+  }
+  if (flags & 0x20) {
+    if (pdu.length < off + 18) return null;
+    const interval = pdu[off + 2] | (pdu[off + 3] << 8); // 1.25 ms units
+    out.periodicIntervalMs = interval * 1.25;
+    off += 18;
+  }
+  // TxPower (bit 6) and ACAD remainder unused.
+  out.adData = pdu.slice(1 + extHdrLen);
   return out;
 }
 
@@ -157,6 +208,7 @@ function parseSnifferAdvPacket(pkt) {
 
   const header = pkt[p];
   const advType = header & 0x0f;
+  const txAddrType = (header >> 6) & 1;
   p += 2; // skip PDU header byte + on-air length byte
   if (pkt.length < p + 1) return null;
 
@@ -168,22 +220,16 @@ function parseSnifferAdvPacket(pkt) {
 
   let addr = null;
   let adPayload = [];
+  let extInfo = null;
   if ([ADV_IND, ADV_NONCONN_IND, SCAN_RSP, ADV_SCAN_IND, ADV_DIRECT_IND].includes(advType)) {
     if (pdu.length < 6) return null;
     addr = pdu.slice(0, 6).reverse();
     adPayload = pdu.slice(6);
   } else if (advType === ADV_EXT_IND) {
-    if (pdu.length < 2) return null;
-    const extLen = pdu[0] & 0x3f;
-    if (pdu.length < 1 + extLen) return null;
-    const extFlags = pdu[1];
-    let off = 2;
-    if (extFlags & 0x01) {
-      if (pdu.length < off + 6) return null;
-      addr = pdu.slice(off, off + 6).reverse();
-      off += 6;
-    }
-    adPayload = pdu.slice(1 + extLen);
+    extInfo = parseExtendedHeader(pdu);
+    if (!extInfo) return null;
+    addr = extInfo.addr || null;
+    adPayload = extInfo.adData;
   } else {
     return null;
   }
@@ -193,11 +239,22 @@ function parseSnifferAdvPacket(pkt) {
   if (!ad.servicedata && !ad.manufacturerdata && !ad.name) return null;
 
   const mac = macFromBytes(addr);
-  const out = { id: mac, mac, rssi, channel, origin: '/BTtoMQTT' };
+  const out = {
+    id: mac,
+    mac,
+    rssi,
+    channel,
+    advType: ADV_TYPE_NAMES[advType] || `ADV_${advType}`,
+    addrType: txAddrType ? 'random' : 'public',
+    phy: PHY_NAMES[phy] || `phy${phy}`,
+    origin: '/BTtoMQTT',
+  };
   if (ad.name) out.name = ad.name;
   if (ad.servicedata) out.servicedata = ad.servicedata;
   if (ad.servicedatauuid) out.servicedatauuid = ad.servicedatauuid;
   if (ad.manufacturerdata) out.manufacturerdata = ad.manufacturerdata;
+  if (extInfo?.auxPtr) out.auxPtr = extInfo.auxPtr;
+  if (extInfo?.periodicIntervalMs !== undefined) out.periodicIntervalMs = extInfo.periodicIntervalMs;
   return out;
 }
 
