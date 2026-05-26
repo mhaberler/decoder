@@ -14,6 +14,7 @@ const LAST_SEEN_TTL_MS = 60_000;
 const PROFILES = [
   { id: 'auto', label: 'Auto-detect', baud: null, flow: null },
   { id: 'nrf', label: 'nRF Sniffer (1 Mbaud)', baud: 1000000, flow: 'hardware', driverName: 'nRF Sniffer' },
+  { id: 'adv2uart', label: 'adv2uart (ESP32-C3)', baud: 115200, flow: 'none', driverName: 'adv2uart' },
   { id: 'omg-115k', label: 'OMG @ 115200', baud: 115200, flow: 'none', driverName: 'OMG' },
   { id: 'omg-921k', label: 'OMG @ 921600', baud: 921600, flow: 'none', driverName: 'OMG' },
   { id: 'omg-9600', label: 'OMG @ 9600',   baud: 9600,   flow: 'none', driverName: 'OMG' },
@@ -32,6 +33,7 @@ export function initSerial(root) {
     log:        root.querySelector('#ser-log'),
     portInfo:   root.querySelector('#ser-portinfo'),
     kind:       root.querySelector('#ser-kind'),
+    controls:   root.querySelector('#ser-driver-controls'),
   };
 
   let port = null;
@@ -167,6 +169,9 @@ export function initSerial(root) {
       const info = port.getInfo?.() ?? {};
       els.portInfo.textContent = `usbVendorId=0x${(info.usbVendorId ?? 0).toString(16)} usbProductId=0x${(info.usbProductId ?? 0).toString(16)} @ ${chosen.baud}${chosen.flow !== 'none' ? ' ' + chosen.flow : ''}`;
       if (els.kind) els.kind.textContent = driver.name;
+      if (els.controls && typeof driver.renderControls === 'function') {
+        driver.renderControls(els.controls);
+      }
       els.connect.disabled = true;
       els.disconnect.disabled = false;
       els.scan.disabled = false;
@@ -209,6 +214,7 @@ export function initSerial(root) {
     els.scan.disabled = true;
     if (els.profile) els.profile.disabled = false;
     if (els.kind) els.kind.textContent = '';
+    if (els.controls) els.controls.replaceChildren();
     els.portInfo.textContent = '';
     setIndicator('idle');
   }

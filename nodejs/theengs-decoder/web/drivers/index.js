@@ -2,6 +2,7 @@
 
 import { createOmgDriver } from './omg.js';
 import { createNrfDriver } from './nrf.js';
+import { createAdv2UartDriver } from './adv2uart.js';
 
 // Driver registry — append new dongle drivers here.
 // Each factory returns a driver instance with:
@@ -12,6 +13,7 @@ import { createNrfDriver } from './nrf.js';
 //   optional: buildPing(), sendPing(write), pingInterval.
 export const driverFactories = [
   createNrfDriver,
+  createAdv2UartDriver,
   createOmgDriver,
 ];
 
@@ -21,9 +23,12 @@ export const driverFactories = [
 // The caller keeps owning `reader` — we never cancel or release it.
 export async function detectDongle({ reader, write, timeoutMs = 600 }) {
   const drivers = driverFactories.map((f) => f());
-  const nrf = drivers.find((d) => d.buildPing);
-  if (nrf) {
-    try { await write(nrf.buildPing()); } catch {}
+  // Probe every driver that exposes a ping/probe-request builder. Their wire
+  // formats are mutually unintelligible, so a dongle ignores the others.
+  for (const d of drivers) {
+    if (typeof d.buildPing === 'function') {
+      try { await write(d.buildPing()); } catch {}
+    }
   }
 
   const deadline = Date.now() + timeoutMs;
