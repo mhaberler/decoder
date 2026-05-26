@@ -2,6 +2,7 @@
 
 import { loadDecoder, decodeEntry } from './decoder.js';
 import { initSerial } from './serial.js';
+import { initRadio } from './radio.js';
 
 // --- Tabs ---
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -114,3 +115,12 @@ runEl.addEventListener('click', async () => {
 
 // --- Serial tab ---
 initSerial(document.querySelector('[data-panel="serial"]'));
+
+// --- BLE radio tab (opt-in via ?webble=true) ---
+const webbleEnabled = new URLSearchParams(location.search).get('webble') === 'true';
+if (webbleEnabled) {
+  initRadio(document.querySelector('[data-panel="radio"]'));
+} else {
+  document.querySelector('.tab-btn[data-tab="radio"]')?.remove();
+  document.querySelector('.tab-panel[data-panel="radio"]')?.remove();
+}

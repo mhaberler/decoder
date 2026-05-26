@@ -23,20 +23,21 @@
   .tab-panel { display: none; border: 1px solid #ccc; border-top: none; padding: 1rem; border-radius: 0 6px 6px 6px; }
   .tab-panel.active { display: block; }
 
-  /* Serial indicator */
-  #ser-indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #999; vertical-align: middle; margin-right: .4rem; }
-  #ser-indicator[data-state="idle"]      { background: #999; }
-  #ser-indicator[data-state="connected"] { background: #1976d2; }
-  #ser-indicator[data-state="scanning"]  { background: #2e7d32; box-shadow: 0 0 6px #2e7d32; animation: pulse 1.2s ease-in-out infinite; }
+  /* Scan indicator (shared serial + radio) */
+  .scan-indicator { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #999; vertical-align: middle; margin-right: .4rem; }
+  .scan-indicator[data-state="idle"]      { background: #999; }
+  .scan-indicator[data-state="connected"] { background: #1976d2; }
+  .scan-indicator[data-state="scanning"]  { background: #2e7d32; box-shadow: 0 0 6px #2e7d32; animation: pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
 
   #ser-portinfo { font-family: ui-monospace, monospace; font-size: 12px; color: #555; }
   #ser-kind { font-size: 12px; color: #1565c0; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #e3f2fd; }
   #ser-kind:empty { display: none; }
-  #ser-counters { font-family: ui-monospace, monospace; font-size: 12px; color: #333; margin-left: auto; }
+  #ser-counters, #rad-counters { font-family: ui-monospace, monospace; font-size: 12px; color: #333; margin-left: auto; }
+  #rad-status { margin-top: .5rem; color: #444; min-height: 1.2em; }
 
-  /* Log */
-  #ser-log { height: 60vh; overflow: auto; background: #fafafa; border: 1px solid #ddd; border-radius: 4px; padding: .5rem; font-family: ui-monospace, monospace; font-size: 12px; }
+  /* Log (shared) */
+  .live-log { height: 60vh; overflow: auto; background: #fafafa; border: 1px solid #ddd; border-radius: 4px; padding: .5rem; font-family: ui-monospace, monospace; font-size: 12px; }
   .log-row { padding: .35rem .5rem; margin: .25rem 0; border-left: 3px solid #bbb; background: #fff; border-radius: 2px; }
   .log-row.log-decoded   { border-left-color: #2e7d32; }
   .log-row.log-undecoded { border-left-color: #999; }
@@ -53,6 +54,7 @@
 <div class="tabs" role="tablist">
   <button class="tab-btn active" data-tab="file" role="tab">File</button>
   <button class="tab-btn" data-tab="serial" role="tab">Serial</button>
+  <button class="tab-btn" data-tab="radio" role="tab">BLE radio</button>
 </div>
 
 <!-- File tab -->
@@ -96,12 +98,28 @@
   <fieldset>
     <legend>Scan</legend>
     <div class="row">
-      <button id="ser-scan"><span id="ser-indicator" data-state="idle"></span><span>Start scan</span></button>
+      <button id="ser-scan"><span id="ser-indicator" class="scan-indicator" data-state="idle"></span><span>Start scan</span></button>
       <button id="ser-clear">Clear log</button>
       <label><input type="checkbox" id="ser-showall"> Show all lines</label>
       <span id="ser-counters">decoded: 0 / seen: 0</span>
     </div>
-    <div id="ser-log" aria-live="polite"></div>
+    <div id="ser-log" class="live-log" aria-live="polite"></div>
+  </fieldset>
+</section>
+
+<!-- BLE radio tab -->
+<section class="tab-panel" data-panel="radio">
+  <p>Scan BLE advertisements using the host machine's own Bluetooth radio via <a href="https://developer.mozilla.org/en-US/docs/Web/API/Bluetooth/requestLEScan" target="_blank" rel="noopener">Web Bluetooth</a>. Requires Chrome/Edge desktop or Android with <code>chrome://flags/#enable-experimental-web-platform-features</code> enabled.</p>
+
+  <fieldset>
+    <legend>Scan</legend>
+    <div class="row">
+      <button id="rad-scan"><span id="rad-indicator" class="scan-indicator" data-state="idle"></span><span>Start scan</span></button>
+      <button id="rad-clear">Clear log</button>
+      <span id="rad-counters">decoded: 0 / seen: 0</span>
+    </div>
+    <div id="rad-status">Idle.</div>
+    <div id="rad-log" class="live-log" aria-live="polite"></div>
   </fieldset>
 </section>
 
