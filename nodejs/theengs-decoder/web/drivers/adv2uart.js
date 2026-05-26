@@ -44,6 +44,21 @@ export function createAdv2UartDriver() {
   let scanning = false;
   let writeRef = null;
 
+  const stats = (typeof window !== 'undefined' ? (window.__adv2uartStats = {
+    writes: 0, writeBytes: 0,
+    feeds: 0, feedBytes: 0,
+    advCount: 0, responseCount: 0, crcErrors: 0, otherEvents: 0,
+    lastResponse: null,
+    lastFeedHex: null,
+    startCalls: 0, stopCalls: 0,
+    scanning: false,
+    parser,
+  }) : null);
+  const wrap = (write) => async (bytes) => {
+    if (stats) { stats.writes++; stats.writeBytes += bytes.length; }
+    return write(bytes);
+  };
+
   function buildScan(cfg) { return appendCrc(buildScanPayload(cfg)); }
   function buildInfo()    { return appendCrc(new Uint8Array([CMD.INFO])); }
   function buildStop()    { return appendCrc(buildScanPayload({ phy1m: false, phyCoded: false })); }
@@ -84,24 +99,48 @@ export function createAdv2UartDriver() {
     },
 
     async start(write) {
-      writeRef = write;
+      if (stats) { stats.startCalls++; stats.scanning = true; }
+      writeRef = wrap(write);
       scanning = true;
-      await write(buildInfo());
-      await write(buildScan(scanCfg));
+      await writeRef(buildInfo());
+      await new Promise((r) => setTimeout(r, 80));
+      await writeRef(buildScan(scanCfg));
     },
 
     async stop(write) {
+      if (stats) { stats.stopCalls++; stats.scanning = false; }
       scanning = false;
-      try { await write(buildStop()); } catch {}
+      try { await wrap(write)(buildStop()); } catch {}
     },
 
     ingest(bytes, { onAdvert, onInfo }) {
+      if (stats) {
+        stats.feeds++;
+        stats.feedBytes += bytes.length;
+        stats.lastFeedHex = Array.from(bytes.slice(0, 64))
+          .map(b => b.toString(16).padStart(2, '0')).join(' ');
+      }
       for (const ev of parser.feed(bytes)) {
         if (ev.type === 'adv') {
+          if (stats) stats.advCount++;
           handleAdv(ev, onAdvert);
-        } else if (ev.type === 'response' && ev.command === CMD.INFO && ev.info?.localMac) {
-          const mac = macFromHexStr(ev.info.localMac);
-          onInfo?.({ version: `adv2uart ${mac}` });
+        } else if (ev.type === 'response') {
+          if (stats) {
+            stats.responseCount++;
+            stats.lastResponse = {
+              cmd: ev.command, cmdName: ev.commandName,
+              status: ev.status, statusName: ev.statusName,
+              dataHex: Array.from(ev.data).map(b => b.toString(16).padStart(2, '0')).join(' '),
+            };
+          }
+          if (ev.command === CMD.INFO && ev.info?.localMac) {
+            const mac = macFromHexStr(ev.info.localMac);
+            onInfo?.({ version: `adv2uart ${mac}` });
+          }
+        } else if (ev.type === 'crc_error') {
+          if (stats) stats.crcErrors++;
+        } else {
+          if (stats) stats.otherEvents++;
         }
       }
     },
