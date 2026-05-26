@@ -20,6 +20,13 @@ const LEGACY_NAMES = {
 };
 const PHY_NAMES = { 1: '1M', 2: '2M', 3: 'Coded' };
 
+// The adv2uart firmware reads up to 64 bytes per usb_serial_jtag_read_bytes
+// call and CRC-checks the whole buffer as a single frame — there is no
+// in-band delimiter or length-prefix re-sync. WebSerial may coalesce two
+// back-to-back writes into one USB bulk transfer, which then fails CRC
+// and is silently dropped. A small host-side gap forces two transfers.
+const INFO_TO_SCAN_GAP_MS = 80;
+
 function macFromHexStr(hex) {
   // adv2uart_api's macFromWire returns already host-order upper-hex without separators.
   return hex.match(/.{2}/g).join(':');
@@ -43,21 +50,6 @@ export function createAdv2UartDriver() {
   let scanCfg = { phy1m: true, phyCoded: true, windowMs: 30 };
   let scanning = false;
   let writeRef = null;
-
-  const stats = (typeof window !== 'undefined' ? (window.__adv2uartStats = {
-    writes: 0, writeBytes: 0,
-    feeds: 0, feedBytes: 0,
-    advCount: 0, responseCount: 0, crcErrors: 0, otherEvents: 0,
-    lastResponse: null,
-    lastFeedHex: null,
-    startCalls: 0, stopCalls: 0,
-    scanning: false,
-    parser,
-  }) : null);
-  const wrap = (write) => async (bytes) => {
-    if (stats) { stats.writes++; stats.writeBytes += bytes.length; }
-    return write(bytes);
-  };
 
   function buildScan(cfg) { return appendCrc(buildScanPayload(cfg)); }
   function buildInfo()    { return appendCrc(new Uint8Array([CMD.INFO])); }
@@ -99,48 +91,25 @@ export function createAdv2UartDriver() {
     },
 
     async start(write) {
-      if (stats) { stats.startCalls++; stats.scanning = true; }
-      writeRef = wrap(write);
+      writeRef = write;
       scanning = true;
-      await writeRef(buildInfo());
-      await new Promise((r) => setTimeout(r, 80));
-      await writeRef(buildScan(scanCfg));
+      await write(buildInfo());
+      await new Promise((r) => setTimeout(r, INFO_TO_SCAN_GAP_MS));
+      await write(buildScan(scanCfg));
     },
 
     async stop(write) {
-      if (stats) { stats.stopCalls++; stats.scanning = false; }
       scanning = false;
-      try { await wrap(write)(buildStop()); } catch {}
+      try { await write(buildStop()); } catch {}
     },
 
     ingest(bytes, { onAdvert, onInfo }) {
-      if (stats) {
-        stats.feeds++;
-        stats.feedBytes += bytes.length;
-        stats.lastFeedHex = Array.from(bytes.slice(0, 64))
-          .map(b => b.toString(16).padStart(2, '0')).join(' ');
-      }
       for (const ev of parser.feed(bytes)) {
         if (ev.type === 'adv') {
-          if (stats) stats.advCount++;
           handleAdv(ev, onAdvert);
-        } else if (ev.type === 'response') {
-          if (stats) {
-            stats.responseCount++;
-            stats.lastResponse = {
-              cmd: ev.command, cmdName: ev.commandName,
-              status: ev.status, statusName: ev.statusName,
-              dataHex: Array.from(ev.data).map(b => b.toString(16).padStart(2, '0')).join(' '),
-            };
-          }
-          if (ev.command === CMD.INFO && ev.info?.localMac) {
-            const mac = macFromHexStr(ev.info.localMac);
-            onInfo?.({ version: `adv2uart ${mac}` });
-          }
-        } else if (ev.type === 'crc_error') {
-          if (stats) stats.crcErrors++;
-        } else {
-          if (stats) stats.otherEvents++;
+        } else if (ev.type === 'response' && ev.command === CMD.INFO && ev.info?.localMac) {
+          const mac = macFromHexStr(ev.info.localMac);
+          onInfo?.({ version: `adv2uart ${mac}` });
         }
       }
     },
