@@ -25,6 +25,10 @@
 #define ARDUINOJSON_USE_LONG_LONG 1
 #include "ArduinoJson.h"
 
+#include <map>
+#include <string>
+#include <vector>
+
 //#define DEBUG_DECODER
 
 class TheengsDecoder {
@@ -42,6 +46,9 @@ public:
   int getTheengModel(JsonDocument& doc, const char* model_id);
 #ifdef UNIT_TESTING
   int testDocMax();
+  // After at least one decodeBLEJson: size of prefix index + fallback.
+  size_t testMatchBucketCount() const;
+  size_t testMatchFallbackCount() const;
 #endif
 
   enum BLE_ID_NUM {
@@ -211,9 +218,22 @@ private:
                                const char* dev_name, const char* svc_uuid, const char* mac_id);
   std::string sanitizeJsonKey(const char* key_in);
 
+  // Build once: serialized conditions + prefix buckets so decodeBLEJson
+  // does not deserialize every device descriptor on every advertisement.
+  void        ensureMatchCache();
+  static void collectConditionKeys(const JsonArray& condition, std::vector<std::string>& keys);
+  void        markBucket(const char* kind, const char* hex_or_null, size_t data_len,
+                         std::vector<char>& want) const;
+
   size_t m_docMax = 11800;
   size_t m_minSvcDataLen = 4;
   size_t m_minMfgDataLen = 10;
+
+  bool                                   m_cacheReady = false;
+  std::vector<std::string>               m_condJson; // per-device condition JSON array
+  size_t                                 m_condDocMax = 1024;
+  std::map<std::string, std::vector<uint16_t> > m_matchBuckets;
+  std::vector<uint16_t>                  m_matchFallback;
 };
 
 #endif

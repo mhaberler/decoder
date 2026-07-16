@@ -21,8 +21,11 @@
 
 #include "decoder.h"
 
+#include <cctype>
 #include <climits>
+#include <cstring>
 #include <string>
+#include <vector>
 
 #include "devices.h"
 
@@ -492,6 +495,205 @@ bool TheengsDecoder::checkPropCondition(const JsonArray& prop_condition,
   return cond_met;
 }
 
+
+void TheengsDecoder::collectConditionKeys(const JsonArray& condition,
+                                          std::vector<std::string>& keys) {
+  const size_t cond_size = condition.size();
+  for (size_t i = 0; i < cond_size;) {
+    if (condition[i].is<JsonArray>()) {
+      collectConditionKeys(condition[i].as<JsonArray>(), keys);
+      ++i;
+      continue;
+    }
+    if (!condition[i].is<const char*>()) {
+      ++i;
+      continue;
+    }
+
+    const char* field = condition[i].as<const char*>();
+    char kind = 0;
+    if (strstr(field, MFG_DATA) != nullptr) {
+      kind = 'm';
+    } else if (strstr(field, "servicedatauuid") != nullptr ||
+               (strstr(field, "uuid") != nullptr && strstr(field, SVC_DATA) == nullptr)) {
+      kind = 'u';
+    } else if (strstr(field, SVC_DATA) != nullptr) {
+      kind = 's';
+    } else {
+      // name / no-mfgdata / mac@index → handled via fallback
+      ++i;
+      continue;
+    }
+
+    size_t j = i + 1;
+    while (j < cond_size) {
+      if (condition[j].is<JsonArray>()) {
+        break;
+      }
+      if (!condition[j].is<const char*>()) {
+        ++j;
+        continue;
+      }
+      const char* op = condition[j].as<const char*>();
+      if (op[0] == '&' || op[0] == '|') {
+        break;
+      }
+      if (strstr(op, "index") != nullptr && strstr(op, "mac@") == nullptr) {
+        if (j + 2 < cond_size && condition[j + 1].is<int>() &&
+            condition[j + 1].as<int>() == 0 && condition[j + 2].is<const char*>()) {
+          const char* hex = condition[j + 2].as<const char*>();
+          size_t n = strlen(hex);
+          if (n >= 2) {
+            // Company ID / leading discriminator: first 4 hex nibbles when available.
+            if (n > 4) {
+              n = 4;
+            }
+            std::string key;
+            key.reserve(2 + n);
+            key += kind;
+            key += ':';
+            for (size_t k = 0; k < n; ++k) {
+              key += (char)tolower((unsigned char)hex[k]);
+            }
+            keys.push_back(key);
+          }
+        }
+        break;
+      }
+      // "contain" and name-style filters are not bucketed (need substring search).
+      if (strstr(op, "contain") != nullptr) {
+        break;
+      }
+      ++j;
+    }
+    i = (j > i) ? j : (i + 1);
+  }
+}
+
+// True when condition may match without a leading hex prefix we indexed
+// (name / contain / mac@index / no-mfgdata / index at non-zero offset).
+static bool conditionNeedsFallback(const JsonArray& condition) {
+  const size_t cond_size = condition.size();
+  for (size_t i = 0; i < cond_size; ++i) {
+    if (condition[i].is<JsonArray>()) {
+      if (conditionNeedsFallback(condition[i].as<JsonArray>())) {
+        return true;
+      }
+      continue;
+    }
+    if (!condition[i].is<const char*>()) {
+      continue;
+    }
+    const char* tok = condition[i].as<const char*>();
+    if (strstr(tok, "no-mfgdata") != nullptr ||
+        (strstr(tok, "name") != nullptr && strstr(tok, "manufacturerdata") == nullptr) ||
+        strstr(tok, "contain") != nullptr || strstr(tok, "mac@index") != nullptr) {
+      return true;
+    }
+    if (strstr(tok, "index") != nullptr && strstr(tok, "mac@") == nullptr) {
+      if (i + 1 < cond_size && condition[i + 1].is<int>() && condition[i + 1].as<int>() != 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void TheengsDecoder::ensureMatchCache() {
+  if (m_cacheReady) {
+    return;
+  }
+
+  const size_t n_devices = sizeof(_devices) / sizeof(_devices[0]);
+  m_condJson.resize(n_devices);
+  m_matchBuckets.clear();
+  m_matchFallback.clear();
+  size_t max_cond_len = 0;
+
+#ifdef UNIT_TESTING
+  DynamicJsonDocument doc(TEST_MAX_DOC);
+#else
+  DynamicJsonDocument doc(m_docMax);
+#endif
+
+  for (size_t i = 0; i < n_devices; ++i) {
+    DeserializationError error = deserializeJson(doc, _devices[i][0]);
+    if (error) {
+      DEBUG_PRINT("ensureMatchCache deserializeJson() failed: %s\n", error.c_str());
+#ifdef UNIT_TESTING
+      assert(0);
+#endif
+      m_matchFallback.push_back((uint16_t)i);
+      continue;
+    }
+
+    JsonArray selectedCondition;
+#ifdef NO_MAC_ADDR
+    if (doc.containsKey("conditionnomac")) {
+      selectedCondition = doc["conditionnomac"];
+    } else {
+      selectedCondition = doc["condition"];
+    }
+#else
+    selectedCondition = doc["condition"];
+#endif
+
+    m_condJson[i].clear();
+    serializeJson(selectedCondition, m_condJson[i]);
+    if (m_condJson[i].size() > max_cond_len) {
+      max_cond_len = m_condJson[i].size();
+    }
+
+    std::vector<std::string> keys;
+    collectConditionKeys(selectedCondition, keys);
+    const bool needs_fb = keys.empty() || conditionNeedsFallback(selectedCondition);
+    if (needs_fb) {
+      m_matchFallback.push_back((uint16_t)i);
+    }
+    for (size_t k = 0; k < keys.size(); ++k) {
+      m_matchBuckets[keys[k]].push_back((uint16_t)i);
+    }
+  }
+
+  // ArduinoJson stores each string token; size >> JSON length for OR-heavy conditions.
+  m_condDocMax = max_cond_len * 4 + 512;
+  if (m_condDocMax < 1024) {
+    m_condDocMax = 1024;
+  }
+  m_cacheReady = true;
+  DEBUG_PRINT("match cache: %u buckets, %u fallback, %u devices, condDoc=%u\n",
+              (unsigned)m_matchBuckets.size(), (unsigned)m_matchFallback.size(),
+              (unsigned)n_devices, (unsigned)m_condDocMax);
+}
+
+void TheengsDecoder::markBucket(const char* kind, const char* data, size_t data_len,
+                                std::vector<char>& want) const {
+  if (data == nullptr || data_len < 2) {
+    return;
+  }
+  // Try 4..2 nibble prefixes so short condition keys still hit.
+  size_t nmax = data_len;
+  if (nmax > 4) {
+    nmax = 4;
+  }
+  for (size_t n = nmax; n >= 2; --n) {
+    std::string key;
+    key.reserve(2 + n);
+    key += kind;
+    key += ':';
+    for (size_t i = 0; i < n; ++i) {
+      key += (char)tolower((unsigned char)data[i]);
+    }
+    std::map<std::string, std::vector<uint16_t> >::const_iterator it = m_matchBuckets.find(key);
+    if (it == m_matchBuckets.end()) {
+      continue;
+    }
+    for (size_t i = 0; i < it->second.size(); ++i) {
+      want[it->second[i]] = 1;
+    }
+  }
+}
+
 /*
  * @brief Compares the input json values to the known devices and
  * decodes the data if a match is found.
@@ -515,8 +717,47 @@ int TheengsDecoder::decodeBLEJson(JsonObject& jsondata) {
     return success;
   }
 
-  /* loop through the devices and attempt to match the input data to a device parameter set */
-  for (auto i_main = 0; i_main < sizeof(_devices) / sizeof(_devices[0]); ++i_main) {
+  ensureMatchCache();
+
+  const size_t n_devices = sizeof(_devices) / sizeof(_devices[0]);
+  std::vector<char> want(n_devices, 0);
+
+  if (mfg_data != nullptr) {
+    markBucket("m", mfg_data, strlen(mfg_data), want);
+  }
+  if (svc_data != nullptr) {
+    markBucket("s", svc_data, strlen(svc_data), want);
+  }
+  if (svc_uuid != nullptr) {
+    const char* uuid = svc_uuid;
+    if (!strncmp(uuid, "0x", 2) || !strncmp(uuid, "0X", 2)) {
+      uuid += 2;
+    }
+    markBucket("u", uuid, strlen(uuid), want);
+  }
+  for (size_t i = 0; i < m_matchFallback.size(); ++i) {
+    want[m_matchFallback[i]] = 1;
+  }
+
+  /* loop through candidate devices (original order → first match wins) */
+  DynamicJsonDocument condDoc(m_condDocMax);
+  for (size_t i_main = 0; i_main < n_devices; ++i_main) {
+    if (!want[i_main]) {
+      continue;
+    }
+
+    condDoc.clear();
+    DeserializationError cond_err = deserializeJson(condDoc, m_condJson[i_main]);
+    if (cond_err) {
+      DEBUG_PRINT("condition deserializeJson() failed: %s\n", cond_err.c_str());
+      continue;
+    }
+    JsonArray selectedCondition = condDoc.as<JsonArray>();
+    if (!checkDeviceMatch(selectedCondition, svc_data, mfg_data, dev_name, svc_uuid, mac_id)) {
+      continue;
+    }
+
+    /* match — load full descriptor once for property extraction */
     DeserializationError error = deserializeJson(doc, _devices[i_main][0]);
     if (error) {
       DEBUG_PRINT("deserializeJson() failed: %s\n", error.c_str());
@@ -530,18 +771,7 @@ int TheengsDecoder::decodeBLEJson(JsonObject& jsondata) {
       peakDocSize = doc.memoryUsage();
 #endif
 
-    /* found a match, extract the data */
-    JsonArray selectedCondition;
-#ifdef NO_MAC_ADDR
-    if (doc.containsKey("conditionnomac")) {
-      selectedCondition = doc["conditionnomac"];
-    } else {
-      selectedCondition = doc["condition"];
-    }
-#else
-    selectedCondition = doc["condition"];
-#endif
-    if (checkDeviceMatch(selectedCondition, svc_data, mfg_data, dev_name, svc_uuid, mac_id)) {
+    {
       jsondata["brand"] = doc["brand"];
       jsondata["model"] = doc["model"];
       jsondata["model_id"] = doc["model_id"];
@@ -1078,5 +1308,13 @@ int TheengsDecoder::testDocMax() {
     DEBUG_PRINT("Error: peak doc size > max; peak: %lu, max: %lu\n", peakDocSize, m_docMax);
   }
   return m_docMax - peakDocSize;
+}
+
+size_t TheengsDecoder::testMatchBucketCount() const {
+  return m_matchBuckets.size();
+}
+
+size_t TheengsDecoder::testMatchFallbackCount() const {
+  return m_matchFallback.size();
 }
 #endif
