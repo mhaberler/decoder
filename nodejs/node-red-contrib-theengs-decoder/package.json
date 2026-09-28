@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "theengs-decoder": "^0.1.0"
+    "theengs-decoder": "^2.4.5"
   },
   "engines": {
     "node": ">=18"
