@@ -21,3 +21,4 @@ docs/devices/_app_devices.md
 generated/
 .cc-history
 python/src
+python/*.egg-info
