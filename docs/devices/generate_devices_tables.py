@@ -27,7 +27,7 @@ for table_data_init in loader_init.load():
 logger.info('Loading device files')
 for filename in os.listdir():
     f = os.path.join(filename)
-    if os.path.isfile(f) and f != file_init:
+    if os.path.isfile(f) and f != file_init and f != file_app:
         with open(f, 'r') as file:
             text = file.read()
             pattern = r'\!\[.*?\]\((.*?)\)'
