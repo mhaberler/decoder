@@ -2219,4 +2219,11 @@ int main() {
   if (decoder.testDocMax() < 0) {
     return 1;
   }
+
+  std::cout << "match cache: " << decoder.testMatchBucketCount() << " buckets, "
+            << decoder.testMatchFallbackCount() << " fallback" << std::endl;
+  if (decoder.testMatchBucketCount() == 0 || decoder.testMatchFallbackCount() == 0) {
+    std::cout << "FAILED! match cache not built" << std::endl;
+    return 1;
+  }
 }

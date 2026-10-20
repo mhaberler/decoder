@@ -9,7 +9,7 @@ JSON device descriptors in `src/devices/` stay the source of truth; accelerate t
 Hot path in `decodeBLEJson` (`src/decoder.cpp`):
 
 ```text
-for each of ~149 devices:
+for each of ~151 devices:
   deserializeJson(doc, _devices[i][0])   // expensive: large DynamicJsonDocument
   checkDeviceMatch(condition, ...)       // cheap after parse
   on hit → extract props → return
@@ -68,7 +68,7 @@ common prefixes).
 | `switch` / computed goto on first discriminating bytes | Best for common Apple / Xiaomi / Ruuvi prefixes |
 | MAC → model sticky cache | Consumer-side; skips table after first hit |
 
-Do **not** naively merge ~149 JSON arrays into one mega-boolean — use
+Do **not** naively merge ~151 JSON arrays into one mega-boolean — use
 buckets / trie + short linear lists.
 
 ## Acceleration levers (best ROI first)
@@ -147,5 +147,11 @@ Done in `src/decoder.cpp` / `src/decoder.h`:
 4. UNIT_TESTING: `testMatchBucketCount()` / `testMatchFallbackCount()`.
 
 Verified: `tests/BLE/test_ble` and `tests/BLE_fail/test_ble_fail` (host cmake build).
+
+Invariant: conditions evaluate left to right without precedence
+(`A | B & C` = `(A | B) & C`), i.e. an AND of OR-groups. A non-fallback condition
+needs at least one OR-group whose every term carries an `index`, `0`, `"<hex>"`
+prefix (≥ 2 nibbles), otherwise a matching ad may hit no bucket. Check with
+`python3 scripts/check_match_buckets.py` after adding devices or rebasing.
 
 Still open: decode counters / µs instrumentation; native predicate codegen; property extractors.
